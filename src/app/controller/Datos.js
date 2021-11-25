@@ -151,7 +151,7 @@ exports.datose= async(req, res) => {
                     let data = `SELECT "idSensor","valor", "fecha", "hora","nombreSensor", "nombreEstacion","maxSensor", "minSensor"
                     From public.dato_sensor  INNER JOIN public.sensor ON dato_sensor.fk_sensor = "idSensor"
                     INNER JOIN public.estacion ON sensor.fk_estacion = "idEstacion"
-                    INNER JOIN public.tiposensores ON sensor.fk_sensores = "id_tipoSensor" WHERE "hora"='${req.params.hora} AND "fecha"=${req.params.fecha}'`;
+                    INNER JOIN public.tiposensores ON sensor.fk_sensores = "id_tipoSensor" WHERE "hora"='${req.params.hora}' AND "fecha"='${req.params.fecha}'`;
                     
                     const query = await pgClient.query(data, function select(error, result, fields) {
                 
