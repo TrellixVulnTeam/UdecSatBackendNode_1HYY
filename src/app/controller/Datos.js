@@ -86,6 +86,25 @@ exports.datose= async(req, res) => {
     console.log("fin.");
     };
 
+    exports.Ultimos= async(req, res) => {
+        let data = `SELECT * From public.dato_sensor
+        where "fk_sensor"= ${req.params.fk_idSensor}
+        ORDER BY "fecha" desc, "hora" desc limit 1`;
+        
+        const query = await pgClient.query(data, function select(error, result, fields) {
+    
+            if (error) {
+            console.log(error);
+            
+            return query ;
+        }
+        
+         res.send(result.rows)
+        
+        });
+        console.log("fin.");
+        };
+
     exports.datosPersonalzados= async(req, res) => {
         let data = `SELECT "idSensor","valor", "fecha", "hora","nombreSensor", "nombreEstacion","maxSensor", "minSensor"
         From public.dato_sensor  INNER JOIN public.sensor ON dato_sensor.fk_sensor = "idSensor"
