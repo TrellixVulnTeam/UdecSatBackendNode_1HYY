@@ -6,5 +6,6 @@ const CSensor= require( "../controller/Sensores");
 
 rSensor.route("/sensor").get( CSensor.sensores);
 rSensor.route("/sensorid/:idSensor").get( CSensor.sensoresid);
+rSensor.route("/sensorciudad/:id_ciudad").get( CSensor.sensoresciudad);
 
 module.exports=rSensor;

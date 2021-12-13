@@ -56,3 +56,23 @@ const query = await pgClient.query(data, function select(error, result, fields) 
 });
 console.log("fin.");
 };
+
+exports.sensoresciudad = async(req, res) => {
+    
+
+    let data = `SELECT "idSensor", "maxSensor", "minSensor","nombreSensor", "nombreEstacion"
+    From public.sensor  INNER JOIN public.tiposensores ON sensor.fk_sensores = "id_tipoSensor"
+    INNER JOIN public.estacion ON sensor.fk_estacion = "idEstacion" WHERE estacion.id_ciudad =${req.params.id_ciudad}`;
+    
+    const query = await pgClient.query(data, function select(error, result, fields) {
+    
+    if (error) {
+    console.log(error);
+    return query ;
+    }
+    
+     res.send(result.rows)
+    
+    });
+    console.log("fin.");
+    };
