@@ -75,7 +75,7 @@ exports.Ultimos = async (req, res) => {
         INNER JOIN public.estacion ON sensor.fk_estacion = "idEstacion"
 		INNER JOIN public.ciudades  ON ciudades.id = "id_ciudad"
         where "fk_sensor"= ${req.params.fk_idSensor}
-        ORDER BY "fecha" desc, "hora" desc limit 1`;
+        ORDER BY "fecha" desc, "hora" desc limit ${1}`;
 
     const query = await pgClient.query(data, function select(error, result, fields) {
 
@@ -194,38 +194,52 @@ exports.maximo = async (req, res) => {
     console.log("fin.");
 };
 exports.minimo = async (req, res) => {
-    let data = `SELECT valor,"maxSensor", "minSensor","fk_sensor",ubicacion From public.dato_sensor
-                            INNER JOIN public.sensor ON dato_sensor.fk_sensor ="idSensor"
-                            INNER JOIN public.estacion ON sensor.fk_estacion="idEstacion"
-                            INNER JOIN public.ciudades ON estacion.id_ciudad="id"
-                                    where "fk_sensor"= ${req.params.fk_idSensor}
-                                    and "valor"<="minSensor"
-                                    ORDER BY "fecha" desc, "hora" desc limit 1 `;
 
-    const query = await pgClient.query(data, function select(error, result, fields) {
+            let datas = `SELECT valor,"maxSensor", "minSensor","fk_sensor",ubicacion From public.dato_sensor
+                                    INNER JOIN public.sensor ON dato_sensor.fk_sensor ="idSensor"
+                                    INNER JOIN public.estacion ON sensor.fk_estacion="idEstacion"
+                                    INNER JOIN public.ciudades ON estacion.id_ciudad="id"
+                                            where "fk_sensor"= ${req.params.fk_idSensor}
+                                            and "valor"<="minSensor"
+                                            ORDER BY "fecha" desc, "hora" desc limit 1 `;
 
-        if (error) {
-            console.log(error);
+            const querys = pgClient.query(datas, function select(error, results, fields) {
 
-            return query;
-        }
+                if (error) {
+                    console.log(error);
 
-        res.send(result.rows)
-
-    });
-    console.log("fin.");
-};
-exports.datose = async (req, res) => {
-    let data = `SELECT DISTINCT * From public.dato_sensor where "fk_sensor"= ${req.params.fk_idSensor}
+                    return querys;
+                }
+            
+                res.send(results.rows)
+                console.log(results.rows)
+        });
+        console.log("fin.");
+    };
+    exports.datosultimo = async (req, res) => {
+        let data = `SELECT DISTINCT * From public.dato_sensor where "fk_sensor"= ${req.params.fk_idSensor}
                                 ORDER BY "fecha" desc, "hora" desc limit 5`;
-    const query = await pgClient.query(data, function select(error, result, fields) {
-        if (error) {
-            console.log(error);
-            return query;
-        }
-        res.send(result.rows)
+        const query = await pgClient.query(data, function select(error, result, fields) {
+            if (error) {
+                console.log(error);
+                return query;
+            }
+            res.send(result.rows)
 
-    });
-    console.log("fin.");
-};
+        });
+        console.log("fin.");
+    };
 
+    exports.promedio = async (req, res) => {
+        let data = `SELECT * FROM public.promediofinal where id= ${req.params.id}
+       `;
+        const query = await pgClient.query(data, function select(error, result, fields) {
+            if (error) {
+                console.log(error);
+                return query;
+            }
+            res.send(result.rows)
+
+        });
+        console.log("fin.");
+    };

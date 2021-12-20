@@ -4,5 +4,5 @@ const CDatos = require("../controller/DatosMix");
 /*  users listing. */
 
 
-rDatosMix.route("/alerta").get( CDatos.alerta); 
+//rDatosMix.route("/alerta").get( CDatos.alerta); 
 module.exports= rDatosMix ;

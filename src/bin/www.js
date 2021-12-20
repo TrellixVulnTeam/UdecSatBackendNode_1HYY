@@ -6,12 +6,27 @@
 
 var app = require('../app');
 var debug = require('debug')('udecsatbackend:server');
-var http = require('http');
-
+const http = require('http').Server(app);
+const io = require('socket.io')(http , {origins: '*:*'});
 /**
  * Get port from environment and store in Express.
  */
-
+ io.on('connection', (socket) => {
+  
+  socket.on('disconnect', function(){
+    io.emit('users-changed', {user: socket.nickname, event: 'left'});   
+  });
+ 
+  socket.on('set-nickname', (nickname) => {
+    socket.nickname = nickname;
+    io.emit('users-changed', {user: nickname, event: 'joined'});    
+  });
+  
+  socket.on('add-message', (message) => {
+    io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});    
+  });
+});
+ 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
