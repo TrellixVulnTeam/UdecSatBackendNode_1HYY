@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('udecsatbackend:server');
 const http = require('http').Server(app);
-const io = require('socket.io')(http , {origins: '*:*'});
+//const io = require('socket.io')(http , {origins: '*:*'});
 /**
  * Get port from environment and store in Express.
 
