@@ -10,7 +10,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http , {origins: '*:*'});
 /**
  * Get port from environment and store in Express.
- */
+
  io.on('connection', (socket) => {
   
   socket.on('disconnect', function(){
@@ -25,7 +25,7 @@ const io = require('socket.io')(http , {origins: '*:*'});
   socket.on('add-message', (message) => {
     io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});    
   });
-});
+}); */
  
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
