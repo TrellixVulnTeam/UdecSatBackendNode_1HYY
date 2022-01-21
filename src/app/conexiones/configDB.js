@@ -18,7 +18,7 @@ const pool = new Pool({
 },
 
 })
-console.log(connectionString);
+//console.log(connectionString);
 
 module.exports ={
   isProduction,

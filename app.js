@@ -7,7 +7,7 @@ const favicon = require('serve-favicon');
 const rDatos = require('./src/app/routes/Datos');
 const rEstacion = require('./src/app/routes/Estaciones');
 const rSensor = require('./src/app/routes/Sensores');  
-const rDatosMix = require('./src/app/routes/DatosMix');
+const rDatosSMS = require('./src/app/routes/DatosSMS');
 
 var app = express();
 
@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
 app.use("/api", rDatos);
 app.use("/api", rEstacion);
 app.use("/api", rSensor);
-app.use("/api", rDatosMix);
+app.use("/api", rDatosSMS);
 
   app.get('/', async(req, res) => {
    return res.send("este es el servidor de udecSat alertas tempranas");

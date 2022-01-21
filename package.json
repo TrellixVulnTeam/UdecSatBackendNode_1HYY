@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "start:watch": "node ./bin/www"
   },
   "dependencies": {
     "@pusher/push-notifications-server": "^1.2.4",
     "@types/socket.io": "^2.1.10",
+    "@vonage/server-sdk": "^2.10.10",
+    "agenda": "^4.2.1",
     "arr-map": "^2.0.2",
     "body-parser": "^1.19.1",
     "cookie-parser": "~1.4.4",
@@ -16,16 +21,25 @@
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
-    "firebase": "^9.6.1",
+    "firebase-admin": "^10.0.1",
     "http-errors": "~1.6.3",
+    "install": "^0.13.0",
     "jade": "~1.11.0",
     "map-factory": "^3.8.5",
     "morgan": "~1.9.1",
+    "nexmo": "^2.7.0-beta-1",
+    "npm": "^8.3.0",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "pusher": "^5.0.0",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.4.1",
-    "twilio": "^3.71.3"
+    "twilio": "^3.73.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.4.7",
+    "supertest": "^6.2.1"
   }
 }
