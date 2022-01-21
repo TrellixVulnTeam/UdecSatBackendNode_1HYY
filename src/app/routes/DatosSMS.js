@@ -6,8 +6,8 @@ const CDatos = require("../controller/SMS");
 
 
 rDatosSMS.route("/sms").get( CDatos.SMS); 
-rDatosSMS.route("/message").post( CDatos.subcribir); 
-rDatosSMS.route("/verificar").post( CDatos.verificar); 
+//rDatosSMS.route("/message").post( CDatos.subcribir); 
+//rDatosSMS.route("/verificar").post( CDatos.verificar); 
 setInterval(function() {
     CDatos.SMS1()
 },8000);

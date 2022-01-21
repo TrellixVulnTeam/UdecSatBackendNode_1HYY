@@ -1,16 +1,13 @@
 const admin =require("../conexiones/configFirebase");
-var cron = require('cron');
-//const vonage =require("../conexiones/configSMS");
 const { pool } = require('../conexiones/configDB');
 const pusher = require('../conexiones/configPusher');
-//const clientT =require("../conexiones/configSMS");
 const accountSid= process.env.Twilio_accountSid;
 const authToken= process.env.Twilio_authToken;
 const very= process.env.Twilio_very;
 var twilio = require('twilio');
 var clientT = new twilio (accountSid, authToken); 
 var map = Array.prototype.map;
-var MessagingResponse = require('twilio').twiml.MessagingResponse;
+//var MessagingResponse = require('twilio').twiml.MessagingResponse;
 const from = "+19147580437";
 var numbers = [];
 let pgClient;
@@ -97,7 +94,7 @@ exports.SMS1 = async (req, res) => {
     }); 
     console.log("fin.");  
 };
-exports.subcribir  = async (req, res) => {
+ /* exports.subcribir  = async (req, res) => {
    var phone = req.body.phone;
    console.log(phone);
    clientT.verify.services(very).verifications.create({to: phone, channel: 'sms'}).then(verification => console.log(verification.status))
@@ -114,7 +111,7 @@ exports.verificar  = async (req, res) => {
          console.log("si llego ",verification_check.status));
 }
 
- /* exports.subcribir  = async (req, res) => {
+exports.subcribir  = async (req, res) => {
  var resp = new MessagingResponse();
   if( req.body.Body === 'subscribe' ) {
     var fromNum = req.body.From;
