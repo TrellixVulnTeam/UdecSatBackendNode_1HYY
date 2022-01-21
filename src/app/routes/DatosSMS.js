@@ -10,5 +10,5 @@ rDatosSMS.route("/message").post( CDatos.subcribir);
 rDatosSMS.route("/verificar").post( CDatos.verificar); 
 setInterval(function() {
     CDatos.SMS1()
-},3000);
+},8000);
 module.exports= rDatosSMS ;
