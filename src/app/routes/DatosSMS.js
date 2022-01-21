@@ -1,6 +1,5 @@
 const express = require( 'express');
 var  rDatosSMS = express.Router();
-var Agenda = require('agenda');
 const CDatos = require("../controller/SMS");
 /*  users listing. */
 
