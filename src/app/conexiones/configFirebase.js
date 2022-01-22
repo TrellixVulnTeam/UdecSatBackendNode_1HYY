@@ -1,4 +1,15 @@
-const { initializeApp } = require("firebase/app");
+var admin = require("firebase-admin");
+var serviceAccount = require("../../../udecsat-2996a-firebase-adminsdk-m6j34-a110a09f6c.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://udecsat-2996a-default-rtdb.firebaseio.com"
+});
+
+module.exports=admin;
+  
+/**
+ * const { initializeApp } = require("firebase/app");
 
 const admin = initializeApp({
   apiKey : "AIzaSyCFz6Rcv9A0LNwUQYEQgfkuZNoGPO396YQ" , 
@@ -13,3 +24,4 @@ const admin = initializeApp({
     );
 
 module.exports = admin;
+ */
