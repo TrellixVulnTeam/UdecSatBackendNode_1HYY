@@ -7,14 +7,11 @@ const favicon = require('serve-favicon');
 const rDatos = require('./src/app/routes/Datos');
 const rEstacion = require('./src/app/routes/Estaciones');
 const rSensor = require('./src/app/routes/Sensores');  
-const rDatosSMS = require('./src/app/routes/MensajeSMS');
-
+//const rDatosSMS = require('./src/app/routes/MensajeSMS');
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
