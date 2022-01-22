@@ -6,8 +6,9 @@ admin.initializeApp({
   databaseURL: "https://udecsat-2996a-default-rtdb.firebaseio.com"
 });
 
-module.exports=admin;
-  
+module.exports=admin
+
+
 /**
  * const { initializeApp } = require("firebase/app");
 
