@@ -1,6 +1,6 @@
 //const very= process.env.Twilio_very;
 //var MessagingResponse = require('twilio').twiml.MessagingResponse;
-const admin =require("../conexiones/configFirebase");
+//const admin =require("../conexiones/configFirebase");
 const { pool } = require('../conexiones/configDB');
 const pusher = require('../conexiones/configPusher');
 //const accountSid= process.env.Twilio_accountSid;
@@ -11,7 +11,7 @@ var map = Array.prototype.map;
 const from = "+19147580437";
 var numbers = [];
 let pgClient;
-var database = admin.database(); 
+//var database = admin.database(); 
 pool.connect((err, client) => {
     if (err) {
         console.log(err);
@@ -25,40 +25,7 @@ pool.connect((err, client) => {
     const query = client.query('LISTEN watch_dato_sensor');
 });
 
-exports.SMS = async (req, res) => {
-    let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
-        const query = await pgClient.query(data, function select(error, result, fields) {
 
-        if (error) {
-            console.log(error);
-            return query;
-        }
-        const car = result.rows.map((resul) => {
-            const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
-            if(resul.alerta>=6){               
-                database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
-                numbers.push( snapshot.val()); 
-                console.log( 'Added number ' + snapshot.val());  
-               for( var i = 0; i < numbers.length; i++ ) {
-                console.log( 'Added number ' + numbers.length );  
-              /*  clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        if(responseData.messages!= "0") {
-                            console.log("Message sent successfully.");
-                        } else {
-                            console.log(`Message failed with error`);
-                        }
-                    }
-                });*/
-              }
-               });    
-            }
-        })    
-    }); 
-    console.log("fin.");  
-};
 
 exports.SMS1 = async (req, res) => {
     let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
@@ -71,12 +38,12 @@ exports.SMS1 = async (req, res) => {
         const car = result.rows.map((resul) => {
             const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
             if(resul.alerta>=6){               
-                database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
+             /*   database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  
                for( var i = 0; i < numbers.length; i++ ) {
                 console.log( 'Added number ' + numbers.length );  
-               /* clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
+                clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -86,14 +53,55 @@ exports.SMS1 = async (req, res) => {
                             console.log(`Message failed with error`);
                         }
                     }
-                });*/
+                });
               }
                });    
             }
         })    
-    }); 
+    }); */
     console.log("fin.");  
 };
+
+
+
+
+
+
+
+/*exports.SMS = async (req, res) => {
+    let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
+        const query = await pgClient.query(data, function select(error, result, fields) {
+
+        if (error) {
+            console.log(error);
+            return query;
+        }
+        const car = result.rows.map((resul) => {
+            const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
+            if(resul.alerta>=6){               
+                database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
+                numbers.push( snapshot.val()); 
+                console.log( 'Added number ' + snapshot.val());  
+               for( var i = 0; i < numbers.length; i++ ) {
+                console.log( 'Added number ' + numbers.length );  
+                clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if(responseData.messages!= "0") {
+                            console.log("Message sent successfully.");
+                        } else {
+                            console.log(`Message failed with error`);
+                        }
+                    }
+                });
+            }
+        });    
+     }
+ })    
+}); 
+console.log("fin.");  
+};*/
  /* exports.subcribir  = async (req, res) => {
    var phone = req.body.phone;
    console.log(phone);
@@ -158,8 +166,8 @@ exports.SMS = async (req, res) => {
                     }
                    })
                  });      
-                }
+                }*/
             })    
         }); 
         console.log("fin.");  
-};*/
+};
