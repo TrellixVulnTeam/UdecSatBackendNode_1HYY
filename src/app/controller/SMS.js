@@ -1,4 +1,6 @@
 const admin =require("../conexiones/configFirebase");
+const { getDatabase, ref, child, get } = require("firebase/database");
+const database = ref(getDatabase(admin));
 const { pool } = require('../conexiones/configDB');
 const pusher = require('../conexiones/configPusher');
 const accountSid= process.env.Twilio_accountSid;
@@ -11,7 +13,7 @@ var map = Array.prototype.map;
 const from = "+19147580437";
 var numbers = [];
 let pgClient;
-var database = admin.database(); 
+//var database = admin.database(); 
 pool.connect((err, client) => {
     if (err) {
         console.log(err);
@@ -71,7 +73,7 @@ exports.SMS1 = async (req, res) => {
         const car = result.rows.map((resul) => {
             const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
             if(resul.alerta>=6){               
-                database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
+                get(child(database,'UsuariosPhone/')).then((snapshot) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  
                for( var i = 0; i < numbers.length; i++ ) {

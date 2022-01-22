@@ -21,6 +21,7 @@
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "firebase": "^9.6.4",
     "firebase-admin": "^10.0.1",
     "http-errors": "~1.6.3",
     "install": "^0.13.0",
@@ -28,14 +29,17 @@
     "map-factory": "^3.8.5",
     "morgan": "~1.9.1",
     "nexmo": "^2.7.0-beta-1",
+    "nodemon": "^2.0.15",
     "npm": "^8.3.0",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "pusher": "^5.0.0",
     "serve-favicon": "^2.5.0",
+    "shortid": "^2.2.16",
     "socket.io": "^2.4.1",
     "twilio": "^3.73.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
