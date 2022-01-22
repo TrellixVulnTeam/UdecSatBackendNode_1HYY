@@ -1,19 +1,17 @@
-//const admin =require("../conexiones/configFirebase");
-//const { getDatabase, ref, child, get } = require("firebase/database");
-//const database = ref(getDatabase(admin));
+//const very= process.env.Twilio_very;
+//var MessagingResponse = require('twilio').twiml.MessagingResponse;
+const admin =require("../conexiones/configFirebase");
 const { pool } = require('../conexiones/configDB');
 const pusher = require('../conexiones/configPusher');
-const accountSid= process.env.Twilio_accountSid;
-const authToken= process.env.Twilio_authToken;
-//const very= process.env.Twilio_very;
-var twilio = require('twilio');
-var clientT = new twilio (accountSid, authToken); 
+//const accountSid= process.env.Twilio_accountSid;
+//const authToken= process.env.Twilio_authToken;
+//var twilio = require('twilio');
+//var clientT = new twilio (accountSid, authToken); 
 var map = Array.prototype.map;
-//var MessagingResponse = require('twilio').twiml.MessagingResponse;
 const from = "+19147580437";
 var numbers = [];
 let pgClient;
-//var database = admin.database(); 
+var database = admin.database(); 
 pool.connect((err, client) => {
     if (err) {
         console.log(err);
@@ -38,12 +36,12 @@ exports.SMS = async (req, res) => {
         const car = result.rows.map((resul) => {
             const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
             if(resul.alerta>=6){               
-         //       database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
+                database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  
                for( var i = 0; i < numbers.length; i++ ) {
                 console.log( 'Added number ' + numbers.length );  
-                clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
+              /*  clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -53,9 +51,9 @@ exports.SMS = async (req, res) => {
                             console.log(`Message failed with error`);
                         }
                     }
-                });
+                });*/
               }
-           //    });    
+               });    
             }
         })    
     }); 
@@ -72,14 +70,13 @@ exports.SMS1 = async (req, res) => {
         }
         const car = result.rows.map((resul) => {
             const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
-            if(resul.alerta>=6){      
-               // get(child(database,'UsuariosPhone/')).then((snapshot) => {         
-           //     database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
+            if(resul.alerta>=6){               
+                database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  
                for( var i = 0; i < numbers.length; i++ ) {
                 console.log( 'Added number ' + numbers.length );  
-                clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
+               /* clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -89,9 +86,9 @@ exports.SMS1 = async (req, res) => {
                             console.log(`Message failed with error`);
                         }
                     }
-                });
+                });*/
               }
-              // });    
+               });    
             }
         })    
     }); 
