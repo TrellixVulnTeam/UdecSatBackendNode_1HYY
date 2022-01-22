@@ -13,7 +13,7 @@ var map = Array.prototype.map;
 const from = "+19147580437";
 var numbers = [];
 let pgClient;
-var database = admin.database(); 
+//var database = admin.database(); 
 pool.connect((err, client) => {
     if (err) {
         console.log(err);
