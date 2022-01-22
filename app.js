@@ -30,7 +30,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.use("/api", rDatos);
 app.use("/api", rEstacion);
 app.use("/api", rSensor);
