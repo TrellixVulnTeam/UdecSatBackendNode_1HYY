@@ -32,7 +32,7 @@ exports.SMS1 = async (req, res) => {
 
 
 
-     /*let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
+     let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
         const query = await pgClient.query(data, function select(error, result, fields) {
 
         if (error) {
@@ -41,7 +41,7 @@ exports.SMS1 = async (req, res) => {
         }
         const car = result.rows.map((resul) => {
             const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
-            if(resul.alerta>=6){               
+          /*  if(resul.alerta>=6){               
                 database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  
@@ -60,8 +60,8 @@ exports.SMS1 = async (req, res) => {
                 });
               }
                });    
-            }
-        })    
+            }*/
+        })   
     }); 
-    console.log("fin.");  */
+    console.log("fin.");  
 };
