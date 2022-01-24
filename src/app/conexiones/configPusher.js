@@ -1,3 +1,6 @@
+const dotenv = require( 'dotenv');
+dotenv.config();
+
 const Pusher = require( 'pusher');
 
 // Create an instance of Pusher

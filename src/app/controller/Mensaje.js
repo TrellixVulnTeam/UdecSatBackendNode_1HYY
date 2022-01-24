@@ -1,9 +1,12 @@
 const { pool } = require('../conexiones/configDB');
 const pusher = require('../conexiones/configPusher');
 const admin =require("../conexiones/configFirebase");
+const dotenv = require( 'dotenv');
+dotenv.config();
 const accountSid= process.env.Twilio_accountSid;
 const authToken= process.env.Twilio_authToken;
 var clientT = require('twilio')(accountSid, authToken); 
+
 var map = Array.prototype.map;
 const from = "+16204904795";
 var numbers = [];
@@ -11,6 +14,7 @@ let pgClient;
 var database = admin.database(); 
 const dotenv = require( 'dotenv');
 dotenv.config();
+
 
 pool.connect((err, client) => {
     if (err) {
