@@ -8,6 +8,10 @@
     "test:watch": "jest --watchAll",
     "start:watch": "node ./bin/www"
   },
+  "keywords": [
+    "twilio",
+    "sms"
+  ],
   "dependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
