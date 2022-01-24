@@ -1,10 +1,10 @@
 const { pool } = require('../conexiones/configDB');
 const pusher = require('../conexiones/configPusher');
 const admin =require("../conexiones/configFirebase");
-//const accountSid= process.env.Twilio_accountSid;
-//const authToken= process.env.Twilio_authToken;
-//var twilio = require('twilio');
-//var clientT = new twilio (accountSid, authToken); 
+const accountSid= process.env.Twilio_accountSid;
+const authToken= process.env.Twilio_authToken;
+var twilio = require('twilio');
+var clientT = new twilio (accountSid, authToken); 
 var map = Array.prototype.map;
 const from = "+19147580437";
 var numbers = [];
@@ -27,12 +27,8 @@ pool.connect((err, client) => {
 
 
 exports.SMS1 = async (req, res) => {
-
-        console.log("fin.");
-
-
-
-     let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
+    console.log("inicio.");  
+    let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
         const query = await pgClient.query(data, function select(error, result, fields) {
 
         if (error) {
@@ -47,7 +43,7 @@ exports.SMS1 = async (req, res) => {
                 console.log( 'Added number ' + snapshot.val());  
                for( var i = 0; i < numbers.length; i++ ) {
                 console.log( 'Added number ' + numbers.length );  
-            /*  clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
+                clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -57,11 +53,11 @@ exports.SMS1 = async (req, res) => {
                             console.log(`Message failed with error`);
                         }
                     }
-                });*/
+                });
               }
                });    
             }
-        })   
+        })    
     }); 
     console.log("fin.");  
 };
