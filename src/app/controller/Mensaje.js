@@ -41,13 +41,13 @@ exports.SMS1 = async (req, res) => {
         }
         const car = result.rows.map((resul) => {
             const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
-          /*  if(resul.alerta>=6){               
+            if(resul.alerta>=6){               
                 database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  
                for( var i = 0; i < numbers.length; i++ ) {
                 console.log( 'Added number ' + numbers.length );  
-              clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
+            /*  clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -57,10 +57,10 @@ exports.SMS1 = async (req, res) => {
                             console.log(`Message failed with error`);
                         }
                     }
-                });
+                });*/
               }
                });    
-            }*/
+            }
         })   
     }); 
     console.log("fin.");  
