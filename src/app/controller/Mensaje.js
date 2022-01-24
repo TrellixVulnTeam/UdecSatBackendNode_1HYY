@@ -3,10 +3,9 @@ const pusher = require('../conexiones/configPusher');
 const admin =require("../conexiones/configFirebase");
 const accountSid= process.env.Twilio_accountSid;
 const authToken= process.env.Twilio_authToken;
-var twilio = require('twilio');
-var clientT = new twilio (accountSid, authToken); 
+var clientT = require('twilio')(accountSid, authToken); 
 var map = Array.prototype.map;
-const from = "+19147580437";
+const from = "+16204904795";
 var numbers = [];
 let pgClient;
 var database = admin.database(); 
@@ -27,7 +26,7 @@ pool.connect((err, client) => {
 
 
 exports.SMS1 = async (req, res) => {
-    console.log("inicio.");  
+    console.log("fin.");  
     let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
         const query = await pgClient.query(data, function select(error, result, fields) {
 
