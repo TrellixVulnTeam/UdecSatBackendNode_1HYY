@@ -9,6 +9,8 @@ const from = "+16204904795";
 var numbers = [];
 let pgClient;
 var database = admin.database(); 
+const dotenv = require( 'dotenv');
+dotenv.config();
 
 pool.connect((err, client) => {
     if (err) {

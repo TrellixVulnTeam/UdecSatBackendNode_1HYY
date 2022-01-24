@@ -9,6 +9,10 @@
     "start:watch": "node ./bin/www"
   },
   "dependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
     "@pusher/push-notifications-server": "^1.2.4",
     "@types/socket.io": "^2.1.10",
     "@vonage/server-sdk": "^2.10.10",
