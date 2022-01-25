@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
 app.use("/api", rDatos);
 app.use("/api", rEstacion);
 app.use("/api", rSensor);
-app.use("/api", rDatosSMS);
+//app.use("/api", rDatosSMS);
 
   app.get('/', async(req, res) => {
    return res.send("este es el servidor de udecSat alertas tempranas");
