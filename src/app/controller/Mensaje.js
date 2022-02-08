@@ -27,11 +27,18 @@ pool.connect((err, client) => {
     const query = client.query('LISTEN watch_dato_sensor');
 });
 
+exports.verificar = async (req, res) => {
+    var phone = req.body.phone;
+clientT.validationRequests
+  .create({friendlyName: 'se verifico su numero', phoneNumber:phone })
+  .then(validation_request => console.log(validation_request.friendlyName));
 
+}
 
 exports.SMS1 = async (req, res) => {
     console.log("fin.");  
-    let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
+    let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor">="maxSensor" 
+                GROUP BY ubicacion`;
         const query = await pgClient.query(data, function select(error, result, fields) {
 
         if (error) {
@@ -45,8 +52,9 @@ exports.SMS1 = async (req, res) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  
                for( var i = 0; i < numbers.length; i++ ) {
-                console.log( 'Added number ' + numbers.length );  
-                clientT.messages.create( { to:numbers[i],from:from, body:text}, function( err, responseData ) {
+                console.log( 'Added number ' + numbers.length );                  
+                clientT.messages.create( { to:numbers[i],from:from, body:text}
+                    , function( err, responseData ) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -55,7 +63,7 @@ exports.SMS1 = async (req, res) => {
                         } else {
                             console.log(`Message failed with error`);
                         }
-                    }
+                    }                    
                 });
               }
                });    

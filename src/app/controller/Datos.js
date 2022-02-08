@@ -69,13 +69,8 @@ exports.datos = async (req, res) => {
 //ultimos 5 datos 
 
 exports.Ultimos = async (req, res) => {
-    let data = `SELECT valor, fecha, fk_sensor, fk_estacio, hora, "idDatos","ubicacion"
-	    FROM public.dato_sensor
-        INNER JOIN public.sensor ON dato_sensor.fk_sensor = "idSensor"
-        INNER JOIN public.estacion ON sensor.fk_estacion = "idEstacion"
-		INNER JOIN public.ciudades  ON ciudades.id = "id_ciudad"
-        where "fk_sensor"= ${req.params.fk_idSensor}
-        ORDER BY "fecha" desc, "hora" desc limit ${1}`;
+    let data = `SELECT *
+	FROM public.promedio_nivelactual t 	where t.id= ${req.params.id}`;
 
     const query = await pgClient.query(data, function select(error, result, fields) {
 
@@ -172,8 +167,8 @@ exports.datosFechaHora = async (req, res) => {
     console.log("fin.");
 };
 exports.maximo = async (req, res) => {
-    let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor"<="maxSensor" GROUP BY ubicacion`;
-
+    let data = `SELECT count(*) as alerta,ubicacion FROM public.max_min where "valor">="maxSensor" 
+    GROUP BY ubicacion`;
     const query = await pgClient.query(data, function select(error, result, fields) {
 
         if (error) {
@@ -205,8 +200,12 @@ exports.minimo = async (req, res) => {
     console.log("fin.");
 };
 exports.datosultimo = async (req, res) => {
-    let data = `SELECT DISTINCT * From public.dato_sensor where "fk_sensor"= ${req.params.fk_idSensor}
-                                ORDER BY "fecha" desc, "hora" desc limit 5`;
+    let data = `SELECT DISTINCT *,"identificador",ubicacion From public.dato_sensor
+    INNER JOIN public.sensor ON dato_sensor.fk_sensor ="idSensor" 
+    INNER JOIN public.estacion ON sensor.fk_estacion="idEstacion"
+    INNER JOIN public.ciudades ON estacion.id_ciudad="id"
+    where "fk_sensor"= ${req.params.fk_idSensor} 
+    ORDER BY "fecha" desc, "hora" desc limit 5`;
     const query = await pgClient.query(data, function select(error, result, fields) {
         if (error) {
             console.log(error);
@@ -219,8 +218,7 @@ exports.datosultimo = async (req, res) => {
 };
 
 exports.promedio = async (req, res) => {
-    let data = `SELECT * FROM public.promediofinal where id= ${req.params.id}
-       `;
+    let data = `SELECT * FROM public.promediofinal_total where id= ${req.params.id} `;
     const query = await pgClient.query(data, function select(error, result, fields) {
         if (error) {
             console.log(error);
