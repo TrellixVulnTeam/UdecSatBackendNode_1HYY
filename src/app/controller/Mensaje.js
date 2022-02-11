@@ -47,7 +47,7 @@ exports.SMS1 = async (req, res) => {
         }
         const car = result.rows.map((resul) => {
             const text = 'UdecSat alerta de inundacion en '+resul.ubicacion+'  pongase a salvo ';
-            if(resul.alerta>=6){               
+            if(resul.alerta>=2){               
                 database.ref('UsuariosPhone/').once('child_added').then((snapshot) => {
                 numbers.push( snapshot.val()); 
                 console.log( 'Added number ' + snapshot.val());  

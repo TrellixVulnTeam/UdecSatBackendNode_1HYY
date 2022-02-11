@@ -5,5 +5,5 @@ const CDatos = require("../controller/Mensaje");
 rDatosSMS.route("/sms").post( CDatos.verificar); 
 setInterval(function() {
     CDatos.SMS1()
-},60000);
+},30000);
 module.exports= rDatosSMS ;
