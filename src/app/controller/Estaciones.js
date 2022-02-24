@@ -35,8 +35,6 @@ exports.estacion = async (req, res) => {
     });
     console.log("fin.");
 };
-
-
 exports.estacionid = async (req, res) => {
     let data = `SELECT "idSensor", "maxSensor", "minSensor","nombreSensor", "nombreEstacion"
 From public.sensor INNER JOIN public.tiposensores ON sensor.fk_sensores = "id_tipoSensor"
